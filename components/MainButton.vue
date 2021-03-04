@@ -23,7 +23,7 @@ export default {
   border-radius .4em
   display inline-block
   cursor pointer
-  margin 1rem
+  margin 1rem 1rem 1rem 0
   &:hover
     color $liteGreen
   &--disabled

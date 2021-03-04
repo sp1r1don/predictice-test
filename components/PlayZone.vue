@@ -4,10 +4,11 @@
       v-if="userTime"
     )
       Confetti
-      p Your time {{ userTime }} sec
+      h2 Congratulation {{ playerSettings.name }}!
+      p Your clicked after {{ userTime }} sec
       .view__btns
-        MainButton(@click="startGame") Try again
         MainButton(@click="$emit('showSettings')") Back to settings
+        MainButton(@click="startGame") Try again
     .view.view--start(
       v-if="firstInit"
     )
@@ -60,7 +61,7 @@ export default {
     },
   },
   beforeDestroy() {
-    clearInterval(this.countdown)
+    clearTimeout(this.countdown)
   },
   methods: {
     startGame() {
@@ -75,16 +76,11 @@ export default {
       this.top = 0
     },
     startCountdown() {
-      let count = this.playerSettings.delay
-      this.countdown = setInterval(() => {
-        count = count - 1
-        if (count === 0) {
-          this.randomizedPosition()
-          this.opacity = 1
-          this.showUpTime = performance.now()
-          clearInterval(this.countdown)
-        }
-      }, 1000)
+      this.countdown = setTimeout(() => {
+        this.randomizedPosition()
+        this.opacity = 1
+        this.showUpTime = performance.now()
+      }, this.playerSettings.delay * 1000)
     },
     handleClick() {
       this.clickTime = performance.now()
@@ -108,6 +104,16 @@ export default {
 </script>
 
 <style lang="stylus">
+.play-zone
+  width 100%
+  padding-top 50%
+  background #eee
+  position relative
+.target
+  position absolute
+  background yellow
+  width 50px
+  height 50px
 .view
   position absolute
   left 0
