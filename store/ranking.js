@@ -11,15 +11,7 @@ export const state = () => ({
   ],
 })
 
-export const getters = {
-  getSortedList(state) {
-    return state.list.slice().sort((a, b) => {
-      if (a.time > b.time) return 1
-      if (a.time < b.time) return -1
-      return 0
-    })
-  },
-}
+export const getters = {}
 
 export const actions = {
   saveResult({ commit }, result) {
